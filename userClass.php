@@ -127,7 +127,7 @@ Your new password is $newPassword
 EndOfEmail;
 		mail($this->username, 'Your new FW password', $message);
 		$this->_setMessage('success','Your new password has been emailed to you');
-		return $this->forgotPasswordForm();
+		return $this->loginForm();
 		
 		
 	}
