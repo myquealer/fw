@@ -41,7 +41,6 @@ else{
 		$result = $user->login();	
 	}
 	elseif(array_key_exists('username',$_SESSION)){
-		$user->username = $_SESSION['username'];
 		$result = 'You are logged in!<ul class="list-inline"><li><a href="#" id="logoutLink">Logout</a></li><li><a href="#" id="changePasswordLink">Change Password</a></li></ul>';
 	}
 	else{

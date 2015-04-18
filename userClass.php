@@ -18,7 +18,10 @@ class User {
 	private $salt = '$5$rounds=5000$ABKlWC650hNECIt1fp14NvyGFxcvFpGenj1r$';
 	
 	public function __construct(){
-		if(array_key_exists('username', $_GET)){
+		if(array_key_exists('username', $_SESSION)){
+			$this->username = $_SESSION['username'];
+		}
+		elseif(array_key_exists('username', $_GET)){
 			$this->username = $_GET['username'];
 		}
 		if(array_key_exists('confirmUsername', $_GET)){
@@ -135,7 +138,7 @@ EndOfEmail;
 			'newPassword'=>array('type'=>'password','placeholder'=>'New Password','label'=>'New Password')
 		);
 		$form = $this->_returnForm($inputs,'Change Password');
-		$links = $this->_returnLinks('change');
+		$links = '<ul class="list-inline"><li><a href="#" id="logoutLink">Logout</a></li></ul>';
 		return $header . $form . $links;
 	}
 	public function changePassword(){
@@ -222,7 +225,7 @@ EndOfEmail;
 		$this->message = '<div class="' . $class . '" role="alert">' . $message . '</div>';
 	}
 	private function _encryptPassword($password){
-		return crypt($this->password, $this->salt);
+		return crypt($password, $this->salt);
 	}
 	private function _randomPassword() {
 		$alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
